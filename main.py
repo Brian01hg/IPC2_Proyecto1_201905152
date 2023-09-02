@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 from ListaSimple import ListaSimple
 from ListaSimpleDat import ListaSimpleDato
+from lista_simple import ProcesadorSenales
 from graphviz import Digraph
 from tkinter import *
 from tkinter.filedialog import askopenfile
@@ -11,6 +12,7 @@ t = ListaSimple()
 A = ListaSimple()
 dato = ListaSimpleDato()    
 nombre = ListaSimple()
+procesador = ProcesadorSenales()
 
 
 while seleccion != 6:
@@ -29,6 +31,13 @@ while seleccion != 6:
         archivo = open("entrada.xml", "r")
         tree = ET.parse(archivo)
         root = tree.getroot()
+        root.attrib("-topmost", True)
+        for elemento in root:
+            print('')
+            for subelemento in elemento:
+                nombre.añadir(subelemento.attrib['t'], subelemento.attrib['A'])
+                dato.insertar(subelemento.text)
+            dato.imprimir()
         
     elif seleccion == "2":
         print("matriz binaria")

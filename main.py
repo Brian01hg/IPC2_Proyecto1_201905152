@@ -1,7 +1,16 @@
 import xml.etree.ElementTree as ET
+from ListaSimple import ListaSimple
+from ListaSimpleDat import ListaSimpleDato
 from graphviz import Digraph
 from tkinter import *
 from tkinter.filedialog import askopenfile
+import time
+seleccion = 0
+contador = 0
+t = ListaSimple()
+A = ListaSimple()
+dato = ListaSimpleDato()    
+nombre = ListaSimple()
 
 
 while seleccion != 6:

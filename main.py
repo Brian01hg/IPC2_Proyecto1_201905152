@@ -1,77 +1,82 @@
 import xml.etree.ElementTree as ET
-from ListaSimple import ListaSimple
-from ListaSimpleDat import ListaSimpleDato
 from lista_simple import ProcesadorSenales
-from graphviz import Digraph
-from tkinter import *
-from tkinter.filedialog import askopenfile
+from ListaSimpleDat import ListaSimpleDato
+from ListaSimple import ListaSimple
 import time
-seleccion = 0
-contador = 0
-t = ListaSimple()
-A = ListaSimple()
-dato = ListaSimpleDato()    
-nombre = ListaSimple()
-procesador = ProcesadorSenales()
 
 
-while seleccion != 6:
-    print("""       Menu Principal
-                1. Cargar Archivo
-                2. Procesar Archivo
-                3. Escribir Archivo de Salida
-                4. Mostrar Datos del Estudiante
-                5. Generar Grafica
-                6. Salida
-            """)
-    seleccion = input()
-    if seleccion == "1":
-        Tk().withdraw()
-        archivo = askopenfile(mode='r', filetypes=[('Xml Files', '*.xml''')])
-        archivo = open("entrada.xml", "r")
-        tree = ET.parse(archivo)
-        root = tree.getroot()
-        root.attrib("-topmost", True)
-        for elemento in root:
-            print('')
-            for subelemento in elemento:
-                nombre.añadir(subelemento.attrib['t'], subelemento.attrib['A'])
-                dato.insertar(subelemento.text)
-            dato.imprimir()
-        
-    elif seleccion == "2":
-        print("matriz binaria")
-    elif seleccion == "3":
-        print("")
+def main():
+    procesador = ProcesadorSenales()
+    
 
-    elif seleccion == "4":
-        print("""
-        Brian Antonio Hernandez Gil
-        201905152
-        Introduccion a la Programacion y Computacion 2 Seccion D
-        Ingenieria en Ciencias y Sistemas
-        4to Semestre
-        """)
-    elif  seleccion == "5":
-        nombre_matriz = input('Escriba la matriz que desea graficar:  ')
-        for elemento in root:
-            dot = Digraph(comment='The Round Table')
-            dot.node('A', nombre_matriz)
-            if nombre_matriz == elemento.attrib['nombre']:
-                dot.node('B', 't= ' + elemento.attrib['t'])
-                dot.node('C', 'A= ' + elemento.attrib['A'])
-                dot.edges(['AB','AC'])
-                print(dot.source)
-                print(dot.node)
-               
-        else:
-            print("No se encuentra dicha matriz en el archivo")
-            print("Intentalo denuevo")
+    while True:
+        print("Menú:")
+        print("1. Cargar Archivo")
+        print("2. Procesar Señales")
+        print("3. Escribir Archivo de Salida")
+        print("4. Mostrar Datos del Estudiante")
+        print("5. Generar Gráfico")
+        print("6. Salir")
+
+        opcion = input("Ingrese su elección: ")
+
+        if opcion == '1':
+            nombre_matriz = input("Ingrese el nombre del archivo de entrada: ")
+            procesador.cargar_senales(nombre_matriz)
+        elif opcion == '2':
+            procesador.procesar_senales()
+            time.sleep(1)
+            print("Calculando la matriz binaria...")
+            time.sleep(1)
+            for i in range(5):
+                d = "███████████"
+                print("█"+ d)
+                time.sleep(0.7)
+            time.sleep(2)
+            print("Realizando suma de tuplas...")
+            time.sleep(2)
+            print("Realizado con exito")
+        elif opcion == '3':
+            nombre_archivo_salida = input("Ingrese el nombre del archivo de salida: ")
+
+            root_salida = ET.Element('senalesReducidas')
+
+            for senal in procesador.senales:
+                senal_elem = ET.SubElement(root_salida, 'senal', nombre=senal.nombre, A=str(senal.A))
+
+            for g, (patron, tiempos, fila_reducida) in enumerate(senal.matriz_reducida):
+                grupo_elem = ET.SubElement(senal_elem, 'grupo', g=str(g + 1))
+                tiempos_elem = ET.SubElement(grupo_elem, 'tiempos')
+                tiempos_elem.text = ','.join(map(str, tiempos))
+
+                datos_grupo_elem = ET.SubElement(grupo_elem, 'datosGrupo')
+
+            for A, valor in enumerate(fila_reducida):
+                dato_elem = ET.SubElement(datos_grupo_elem, 'dato', A=str(A + 1))
+                dato_elem.text = str(valor)
+
+                tree_salida = ET.ElementTree(root_salida)
+                tree_salida.write(nombre_archivo_salida)
+
+                print(f"Archivo de salida '{nombre_archivo_salida}' creado exitosamente.")
+        elif opcion == '4':
             
-    elif seleccion == 6:
-        print("Saliendo del programa...")
-        break
+            print("""
+                Brian Antonio Hernandez Gil
+                201905152
+                Introduccion a la Programacion y Computacion 2 Seccion D
+                Ingenieria en Ciencias y Sistemas
+                4to Semestre
+                    """)
+            pass
+        elif opcion == '5':
+            nombre_matriz = input("Ingrese el nombre de la señal: ")
+            procesador.generar_grafico(nombre_matriz)
+        elif opcion == '6':
+            break
+        else:
+            print("Opción inválida. Por favor ingrese una opción válida.")
+        
 
-    else:
-         print("Opción inválida. Intente nuevamente.")
-
+if __name__ == "__main__":
+    main()

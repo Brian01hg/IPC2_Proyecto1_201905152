@@ -1,0 +1,48 @@
+// The Round Table
+digraph {
+	A [label=matriz_patrones]
+	B [label="t= 5"]
+	C [label="A= 4"]
+	A -> B
+	A -> C
+	D11 [label=1]
+	A -> D11
+	D21 [label=1]
+	D11 -> D21
+	D31 [label=0]
+	D21 -> D31
+	D41 [label=1]
+	D31 -> D41
+	D51 [label=0]
+	D41 -> D51
+	D12 [label=0]
+	A -> D12
+	D22 [label=1]
+	D12 -> D22
+	D32 [label=1]
+	D22 -> D32
+	D42 [label=1]
+	D32 -> D42
+	D52 [label=1]
+	D42 -> D52
+	D13 [label=0]
+	A -> D13
+	D23 [label=1]
+	D13 -> D23
+	D33 [label=1]
+	D23 -> D33
+	D43 [label=0]
+	D33 -> D43
+	D53 [label=1]
+	D43 -> D53
+	D14 [label=1]
+	A -> D14
+	D24 [label=0]
+	D14 -> D24
+	D34 [label=0]
+	D24 -> D34
+	D44 [label=1]
+	D34 -> D44
+	D54 [label=1]
+	D44 -> D54
+}

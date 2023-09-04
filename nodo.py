@@ -5,6 +5,7 @@ class Senal:
         self.A = A
         self.datos = [[0] * A for _ in range(t)]
         self.matriz_reducida = []
+        self.matriz_elem = None
 
     def agregar_dato(self, t, A, valor):
         self.datos[t-1][A-1] = valor

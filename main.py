@@ -38,27 +38,11 @@ def main():
             print("Realizado con exito")
         elif opcion == '3':
             nombre_archivo_salida = input("Ingrese el nombre del archivo de salida: ")
+            procesador.procesar_senales()
+            nombre_xml = nombre_archivo_salida + ".xml"
+            procesador.generar_archivo_xml(nombre_xml)
+            procesador.graficar_matriz_reducida(nombre_archivo_salida + ".png")
 
-            root_salida = ET.Element('senalesReducidas')
-
-            for senal in procesador.senales:
-                senal_elem = ET.SubElement(root_salida, 'senal', nombre=senal.nombre, A=str(senal.A))
-
-            for g, (patron, tiempos, fila_reducida) in enumerate(senal.matriz_reducida):
-                grupo_elem = ET.SubElement(senal_elem, 'grupo', g=str(g + 1))
-                tiempos_elem = ET.SubElement(grupo_elem, 'tiempos')
-                tiempos_elem.text = ','.join(map(str, tiempos))
-
-                datos_grupo_elem = ET.SubElement(grupo_elem, 'datosGrupo')
-
-            for A, valor in enumerate(fila_reducida):
-                dato_elem = ET.SubElement(datos_grupo_elem, 'dato', A=str(A + 1))
-                dato_elem.text = str(valor)
-
-                tree_salida = ET.ElementTree(root_salida)
-                tree_salida.write(nombre_archivo_salida)
-
-                print(f"Archivo de salida '{nombre_archivo_salida}' creado exitosamente.")
         elif opcion == '4':
             
             print("""

@@ -1,48 +1,68 @@
 // The Round Table
 digraph {
-	A [label=matriz_patrones]
-	B [label="t= 5"]
-	C [label="A= 4"]
+	A [label="Señal Facilita"]
+	B [label="t= 10"]
+	C [label="A= 3"]
 	A -> B
 	A -> C
-	D11 [label=1]
+	D11 [label=3]
 	A -> D11
-	D21 [label=1]
+	D21 [label=5]
 	D11 -> D21
-	D31 [label=0]
+	D31 [label=4]
 	D21 -> D31
 	D41 [label=1]
 	D31 -> D41
-	D51 [label=0]
+	D51 [label=2]
 	D41 -> D51
+	D61 [label=3]
+	D51 -> D61
+	D71 [label=0]
+	D61 -> D71
+	D81 [label=0]
+	D71 -> D81
+	D91 [label=0]
+	D81 -> D91
+	D101 [label=0]
+	D91 -> D101
 	D12 [label=0]
 	A -> D12
-	D22 [label=1]
+	D22 [label=0]
 	D12 -> D22
-	D32 [label=1]
+	D32 [label=0]
 	D22 -> D32
-	D42 [label=1]
+	D42 [label=0]
 	D32 -> D42
-	D52 [label=1]
+	D52 [label=0]
 	D42 -> D52
-	D13 [label=0]
+	D62 [label=5]
+	D52 -> D62
+	D72 [label=0]
+	D62 -> D72
+	D82 [label=7]
+	D72 -> D82
+	D92 [label=2]
+	D82 -> D92
+	D102 [label=0]
+	D92 -> D102
+	D13 [label=1]
 	A -> D13
-	D23 [label=1]
+	D23 [label=5]
 	D13 -> D23
-	D33 [label=1]
+	D33 [label=5]
 	D23 -> D33
 	D43 [label=0]
 	D33 -> D43
-	D53 [label=1]
+	D53 [label=4]
 	D43 -> D53
-	D14 [label=1]
-	A -> D14
-	D24 [label=0]
-	D14 -> D24
-	D34 [label=0]
-	D24 -> D34
-	D44 [label=1]
-	D34 -> D44
-	D54 [label=1]
-	D44 -> D54
+	D63 [label=4]
+	D53 -> D63
+	D73 [label=0]
+	D63 -> D73
+	D83 [label=5]
+	D73 -> D83
+	D93 [label=9]
+	D83 -> D93
+	D103 [label=1]
+	D93 -> D103
 }
